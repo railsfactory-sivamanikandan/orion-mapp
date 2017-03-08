@@ -1,0 +1,7 @@
+export const EMPLOYEE_LIST = 'EMPLOYEE_LIST';
+export const EMPLOYEE_COUNT = 'EMPLOYEE_COUNT';
+export const CURRENT_USER = 'CURRENT_USER';
+export const USER_LOGOUT = 'USER_LOGOUT';
+
+export const SIDE_MENU_OPEN = 'SIDE_MENU_OPEN';
+export const SIDE_MENU_CLOSE = 'SIDE_MENU_CLOSE';
