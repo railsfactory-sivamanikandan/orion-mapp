@@ -96,6 +96,16 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file('muser_keystore.jks')
+            storePassword '123456'
+            keyAlias 'Orion'
+            keyPassword '123456'
+        }
+    }
+
     splits {
         abi {
             reset()
@@ -105,8 +115,15 @@ android {
         }
     }
     buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+
         release {
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled false
+            debuggable false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
