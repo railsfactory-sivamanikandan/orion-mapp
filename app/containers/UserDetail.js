@@ -48,7 +48,7 @@ class UserDetail extends Component {
             left={{
                 icon: "ios-arrow-back",
                 iconColor: "white",
-                label: "Back",
+                label: "",
                 onPress: Actions.pop,
                 style:{color: 'white'},
             }}

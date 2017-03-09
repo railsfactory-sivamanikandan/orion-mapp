@@ -3,7 +3,7 @@ import ReactNative from "react-native";
 import Tcomb from "tcomb-form-native";
 import { connect } from 'react-redux';
 import { Actions } from "react-native-router-flux";
-import LoadingSpinnerOverlay from 'react-native-smart-loading-spinner-overlay'
+import Spinner from 'react-native-loading-spinner-overlay';
 import { Navbar } from 'navbar-native';
 import ContainerWithMenu from "./ContainerWithMenu";
 
@@ -63,6 +63,10 @@ class Login extends Component {
   constructor(props){
     super(props)
 
+    this.state = {
+      visible: false,
+    }
+
     this.onSubmit = this.onSubmit.bind(this)
   }
 
@@ -71,10 +75,7 @@ class Login extends Component {
       <ContainerWithMenu>
         <Navbar title={"Login"} bgColor="#0b74c4" />
         <View style={styles.container}>
-          <LoadingSpinnerOverlay
-            ref={ component => this._partModalLoadingSpinnerOverLay = component }
-            modal={true}
-            marginTop={64}/>
+          <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
           <Image source={require('../images/logo.png')}/>
           <Form
             ref="form"
@@ -90,14 +91,15 @@ class Login extends Component {
   }
   onSubmit(){
     let self = this;
-    this._partModalLoadingSpinnerOverLay.show()
+    // this._partModalLoadingSpinnerOverLay.show()
+    this.setState({visible: true})
     this.props.userLogin(this.refs.form.getValue()).then((res) => {
-      self._partModalLoadingSpinnerOverLay.hide()
       if(res){
         Actions.users();
       } else{
         Alert.alert('Warning',"Username or Password invalid");
       }
+      this.setState({visible: false})
     })
   }
 }
